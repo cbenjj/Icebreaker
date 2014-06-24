@@ -1,5 +1,5 @@
 <?php
-define(ROOT, 'http://localhost/icebreaker/');
+define(ROOT, 'http://ec2-50-112-162-184.us-west-2.compute.amazonaws.com/Icebreaker/');
 define(FACEBOOK_APPID, '242999689243129');
 define(FACEBOOK_SECRET, '8e22375f93cd5db3767016410a3fc193');
 
