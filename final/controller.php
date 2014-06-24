@@ -59,6 +59,6 @@ function getCurrentStatusLocal (){
     //$mapper->getMatch($senderid,$recieverid);
     
     // sample url for matching page
-    echo "http://localhost/icebreaker/meet.php?sender_facebookid=500383379&receiver_facebookid=1173581624";
+    echo ROOT."meet.php?sender_facebookid=500383379&receiver_facebookid=1173581624";
 }
 ?>
