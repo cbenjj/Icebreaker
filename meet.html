@@ -6,9 +6,15 @@
 	</head>
 	<body>
 
-<h1>Hi Ron, I'm Max!<br> Wanna meet?</h1>
+<h1>Hi <?php getUserByFacebookId(Match.$user1) ?>, I'm <?php getUserById(Match.$user2) ?> <br> Wanna meet?</h1>
 
-<form method="post" action="Mapper.php">
+<form method="REQUEST" action="controller.php">
+<input type="hidden" name="action" value="sendmessage" />
+
+<input type="hidden" name="deviceid" value="testDevice" />
+
+<input type="hidden" name="senderid" value="1" />
+<input type="hidden" name="receiverid" value="2" />
 Recognize me by
 <br>
 <input class="textbox" type="text" name="message"><br>

@@ -27,6 +27,10 @@ switch ($action)
 	getMatchLocal();
 	break;
 	
+	case 'currentstatusget':
+	getCurrentStatusLocal();
+	break;
+	
 	
 
 	
@@ -64,6 +68,14 @@ echo "MAMMAA";
 	
 	$mapper = new Mapper();
 $mapper->getMatch($senderid,$recieverid);
+}
+
+function getCurrentStatusLocal (){
+echo "http://www.guimp.com/";
+	
+	//$mapper = new Mapper();
+//$mapper->getMatch($senderid,$recieverid);
+
 }
 
 ?>
