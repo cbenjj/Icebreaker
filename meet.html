@@ -1,0 +1,72 @@
+<body>
+
+
+<h2> Hi <?php getUserByFacebookId(Match.$user1) ?>,  I'm <?php getUserById(Match.$user2) ?> Wanna meet? </h2>
+
+<form method="POST" action="controller.php">
+<input type="hidden" name="action" value="matchget" />
+
+<input type="hidden" name="deviceid" value="ballsack" />
+
+<input type="hidden" name="senderid" value="1" />
+<input type="hidden" name="receiverid" value="2" />
+Tell me where: 
+<br>
+<input type="text" name="message">
+<input type="submit" value="send">
+</form>
+
+<br>
+
+<h2> Things we have in common! </h2>
+
+<div class="about_me">
+<h3> Music  </h3>
+<p>THE BEST TYPE OF MUSIC </p>
+</div>
+
+<div class="about_me">
+<h3> Movies  </h3>
+<p>THE BEST TYPE OF Movies </p>
+</div>
+
+<div class="about_me">
+<h3> Sports  </h3>
+<p>THE BEST TYPE OF Sports </p>
+</div>
+
+
+
+
+</body>
+
+<style>
+
+*{
+text-align:center;
+}
+
+body {
+
+background: -moz-linear-gradient(top, rgba(237,108,105,0.8) 0%, rgba(12,170,226,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(237,108,105,0.8)), color-stop(100%,rgba(12,170,226,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(237,108,105,0.8) 0%,rgba(12,170,226,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(237,108,105,0.8) 0%,rgba(12,170,226,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(237,108,105,0.8) 0%,rgba(12,170,226,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom, rgba(237,108,105,0.8) 0%,rgba(12,170,226,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9ed6c69', endColorstr='#0caae2',GradientType=0 ); /* IE6-9 */
+
+
+}
+
+input {
+background-color: white;
+}
+
+.about_me {
+border: 1px solid;
+margin: 2px;
+padding: 10px;
+background-color: rgba(255, 255, 255, 0.5);
+}
+</style>
