@@ -3,12 +3,12 @@
 require_once 'dal/Mapper.php';
 
 
-$action=$_POST['action'];
+$action=$_REQUEST['action'];
 
-	$senderid=$_POST['senderid'];
+	$senderid=$_REQUEST['senderid'];
 	
 	
-	$receiverid=$_POST['receiverid'];
+	$receiverid=$_REQUEST['receiverid'];
 
 switch ($action)
 {
@@ -37,12 +37,13 @@ switch ($action)
 function sendMessageLocal()
 {
 
-var_dump($_POST);
+var_dump($_REQUEST);
 
 
+echo $_REQUEST['message'];
 	
 	$mapper = new Mapper();
-$mapper->sendMessage($senderid, $receiverid, $_POST['message']);
+$mapper->sendMessage($senderid, $receiverid, $_REQUEST['message']);
 	
 }
 
