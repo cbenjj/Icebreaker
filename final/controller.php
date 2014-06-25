@@ -64,32 +64,36 @@ function getCurrentStatusLocal (){
     $deviceid = $_GET['deviceid'];
     $user = $mapper->getUserByDeviceId($deviceid);
     
-    // get latitude and longitude
-    $lat = floatval($_GET['lat']);
-    $lng = floatval($_GET['lon']);
-    
-    // check for a message from another user
-    $match = $mapper->hasUserMessageMatch($user);
-    
-    // if message exists display url for meet2.php
-    if (!is_null($match))
+    if ($user->facebookid && !is_null($user->facebookid))
     {
-        echo ROOT."meet2.php?sender_facebookid=".$match->sender['facebookid']."&receiver_facebookid=".$match->receiver['facebookid'];
-        exit;
-    }
     
-    // if there is no message check for users around the area
-    // update current user location
-    $user->location = array($lng, $lat);
-    $mapper->updateUserLocation($user);
-    
-    $users = $mapper->getUsersByLocation($user, $lat, $lng);
-    if (!empty($users))
-    {
-    	// if there is a user in the area with same likes
-    	// return url meet.php
-//     	echo ROOT."meet.php?sender_facebookid=500383379&receiver_facebookid=1173581624";
-        echo ROOT."meet.php?sender_facebookid=".$user->facebookid."&receiver_facebookid=".$users[0]->facebookid;
+        // get latitude and longitude
+        $lat = floatval($_GET['lat']);
+        $lng = floatval($_GET['lon']);
+        
+        // check for a message from another user
+        $match = $mapper->hasUserMessageMatch($user);
+        
+        // if message exists display url for meet2.php
+        if (!is_null($match))
+        {
+            echo ROOT."meet2.php?sender_facebookid=".$match->sender['facebookid']."&receiver_facebookid=".$match->receiver['facebookid'];
+            exit;
+        }
+        
+        // if there is no message check for users around the area
+        // update current user location
+        $user->location = array($lng, $lat);
+        $mapper->updateUserLocation($user);
+        
+        $users = $mapper->getUsersByLocation($user, $lat, $lng);
+        if (!empty($users))
+        {
+        	// if there is a user in the area with same likes
+        	// return url meet.php
+    //     	echo ROOT."meet.php?sender_facebookid=500383379&receiver_facebookid=1173581624";
+            echo ROOT."meet.php?sender_facebookid=".$user->facebookid."&receiver_facebookid=".$users[0]->facebookid;
+        }
     }
 }
 ?>
