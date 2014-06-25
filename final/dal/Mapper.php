@@ -315,9 +315,7 @@ Class Mapper
             
             $result = $collection->count( $query );
             
-            print"<pre>";print_r($result);print"</pre>";
-            
-            return $result;
+            return $result>0?true:false;
         
         
         } catch (Exception $e) {
