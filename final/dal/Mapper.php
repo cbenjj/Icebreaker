@@ -233,7 +233,7 @@ Class Mapper
         
             // validate the user exists to avoid duplicate values
             // find by criteria
-            $query = array( '$and' => array( array('receiver.facebookid' => $user->facebookid), array('message' => array( '$ne' => 'null') ) ));
+            $query = array( '$and' => array( array('receiver.facebookid' => $user->facebookid), array('message' => array( '$ne' => null) ) ));
             $result = $collection->find( $query )->sort( array( 'timestamp' => -1 ) )->limit(1);
         
             if ($result->hasNext())
