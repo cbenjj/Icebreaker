@@ -1,5 +1,9 @@
 <?php require_once 'config.php';?>
-<?php 
+<?php
+function cmp_by_category($a, $b) {
+    return strcmp($a->category, $b->category);
+}
+
 $sender_facebookid = $_REQUEST['sender_facebookid'];
 $receiver_facebookid = $_REQUEST['receiver_facebookid'];
 
@@ -8,6 +12,9 @@ $sender = $mapper->getUserByFacebookId($sender_facebookid);
 $receiver = $mapper->getUserByFacebookId($receiver_facebookid);
 
 $match = $mapper->getMatch($sender, $receiver);
+
+$commonlikes = $mapper->getCommonLikes($sender, $receiver);
+usort($commonlikes, "cmp_by_category");
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -40,27 +47,20 @@ $match = $mapper->getMatch($sender, $receiver);
 
 <div id="accordion">
 
+<div id="accordion">
+<?php $i=0; ?>
+<?php while ($i < count($commonlikes)) { ?>
+<?php $current = $commonlikes[$i]; ?>
 <div class="about_me">
-<h3 class="accordion-toggle"> Languages <img src="img/dropdown_arrow2.png" /> </h3>
+<h3 class="accordion-toggle"> <?=$current->category?> <img src="img/dropdown_arrow2.png" /> </h3>
 <div class="accordion-content">
-<p>The best one: Espanpol</p>
-<p>The hardest one: Mandarin</p>
-<p>The most confusing one: Hindi</p>
+<?php while ($i < count($commonlikes) && $current->category==$commonlikes[$i]->category) { ?>
+<p><?=$commonlikes[$i]->name?></p>
+<?php $i++;?>
+<?php } ?>
 </div>
-</div>
-
-<div class="about_me">
-<h3 class="accordion-toggle"> Movies <img src="img/dropdown_arrow2.png" />  </h3>
-<div class="accordion-content">
-<p>The best type of movies </p>
-</div>
-</div>
-
-<div class="about_me">
-<h3 class="accordion-toggle"> Sports <img src="img/dropdown_arrow2.png" />  </h3>
-<div class="accordion-content">
-<p>The best type of sports </p>
-</div>
+</div>        
+<?php } ?>
 </div>
 
 </div>
