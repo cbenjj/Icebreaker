@@ -12,6 +12,9 @@ $mapper->completeMatch($match);
 		<meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="icebreaker.css" />
 		<style type="text/css">
+		html {
+		  height: 100%;
+		}
 		body {
 		  height: 100%;
 		}
