@@ -59,7 +59,8 @@ if ($user) {
 }
 else
 {
-    $params = array('scope' => 'user_likes, email, languages, favorite_teams, education');
+//     $params = array('scope' => 'user_likes, email, languages, favorite_teams, education');
+    $params = array('scope' => 'user_likes, email');
     
     $loginUrl = $facebook->getLoginUrl($params);
 
