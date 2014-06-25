@@ -124,7 +124,7 @@ Class Mapper
         }   
     }
     
-    function createMatch(User $sender, User $receiver, $message)
+    function createMatch(User $sender, User $receiver, $message = null)
     {
         try {
             
@@ -134,23 +134,7 @@ Class Mapper
             // validate the user exists to avoid duplicate values
             // find by criteria
             
-//             $query = array( '$and' =>
-//                         array(
-//                         array( 'sender' =>
-//                                 array( '$elemMatch' =>
-//                                         array( 'facebookid' => $sender->facebookid )
-//                                 )
-//                         ),
-//                         array( 'receiver' =>
-//                                 array( '$elemMatch' =>
-//                                         array( 'facebookid' => $receiver->facebookid )
-//                                 )
-//                         )
-//                         )
-//                         );
-            
-            
-            $exists = $collection->count( $query );
+//             $exists = $collection->count( $query );
             $exists = 0;
             
             if (!$exists)
@@ -170,7 +154,6 @@ Class Mapper
             }
         
         } catch (Exception $e) {
-            
             error_log($e);
             throw $e;
         }

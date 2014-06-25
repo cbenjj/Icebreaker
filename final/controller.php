@@ -33,7 +33,7 @@ function sendMessageLocal()
         $sender = $mapper->getUserByFacebookId($senderid);
         $receiver = $mapper->getUserByFacebookId($receiverid);
         
-        $mapper->createMatch($sender, $receiver, $_POST['message']);
+//         $mapper->createMatch($sender, $receiver, $_POST['message']);
         
         header('location:index.php');
         
@@ -92,6 +92,7 @@ function getCurrentStatusLocal (){
             
             if (!empty($users))
             {
+                $mapper->createMatch($user, $users[0]);
             	// if there is a user in the area with same likes
             	// return url meet.php
         //     	echo ROOT."meet.php?sender_facebookid=500383379&receiver_facebookid=1173581624";
