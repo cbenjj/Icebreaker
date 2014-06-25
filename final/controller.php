@@ -107,6 +107,4 @@ function getCurrentStatusLocal (){
         }
     }
 }
-
-// function getCommonLikes()
 ?>

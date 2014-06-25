@@ -322,9 +322,34 @@ Class Mapper
         }   	
     }
     
-//     function removeCollection()
-//     {
-//         $collection = $this->db->user;
-//         $collection->remove();
-//     }
+    function getCommonLikes(User $user1, User $user2)
+    {
+    	$commonLikes = array();
+    	
+    	if (!empty($user1->likes) && !empty($user2->likes))
+    	{
+    		
+    	    foreach ($user1->likes as $like)
+    	    {
+    	    	
+    	        $i=0;
+    	        $hascommon=false;
+    	        while ($i < count($user2->likes) && !$hascommon)
+    	        {
+    	            if ($like->name == $user2->likes[$i]->name)
+    	            {
+    	                array_push($commonLikes, $like);
+    	            	$hascommon=true;
+    	            }
+    	        	
+    	           $i++;
+    	        }
+    	        
+    	    }
+    	    
+    	}
+    	
+    	return $commonLikes;
+    }
+    
 }
