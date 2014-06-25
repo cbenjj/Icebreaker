@@ -304,8 +304,12 @@ Class Mapper
             $query = array( 
                             '$and' => array(
                                     array('timestamp' => array('$gt' => $time)),
-                                    array('$or' => array(array('receiver.facebookid' => $user->facebookid ) , array( 'sender.facebookid' => $user->facebookid )
-                                    ))
+                                    
+                                    array('$or' => array(
+                                            array('receiver.facebookid' => $user->facebookid ) ,
+                                            array( 'sender.facebookid' => $user->facebookid )
+                                        )
+                                    )
                             ) 
                         );
             $result = $collection->count( $query );
