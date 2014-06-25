@@ -9,8 +9,6 @@ $sender = $mapper->getUserByFacebookId($sender_facebookid);
 $receiver = $mapper->getUserByFacebookId($receiver_facebookid);
 
 $commonlikes = $mapper->getCommonLikes($sender, $receiver);
-
-print"<pre>";print_r($commonlikes);print"</pre>";die;
 ?>
 
 <!DOCTYPE HTML>

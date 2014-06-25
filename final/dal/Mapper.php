@@ -256,6 +256,18 @@ Class Mapper
     {
     	$maxscore = 0;
     	$maxuser = null;
+    	
+    	foreach($users as $user2)
+    	{
+    		$commonLikes = $this->getCommonLikes($user, $user2);
+    		if (count($commonLikes) > $maxscore)
+    		{
+    			$maxscore = count($commonLikes);
+    			$maxuser = $user2;
+    		}
+    	}
+    	
+    	return $maxuser;
     }
     
     function updateUserLocation(User $user)

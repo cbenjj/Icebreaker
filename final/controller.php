@@ -96,13 +96,15 @@ function getCurrentStatusLocal (){
             if (!empty($users))
             {
                 // if there is a user in the area with same likes
+                $bestmatch = $mapper->getBestMatch($user, $users);
                 
-                
-                
-                $mapper->createMatch($user, $users[0]);
-            	// return url meet.php
-                echo ROOT."meet.php?sender_facebookid=".$user->facebookid."&receiver_facebookid=".$users[0]->facebookid;
-                exit;
+                if (!is_null($bestmatch))
+                {
+                    $mapper->createMatch($user, $bestmatch);
+                	// return url meet.php
+                    echo ROOT."meet.php?sender_facebookid=".$user->facebookid."&receiver_facebookid=".$bestmatch->facebookid;
+                    exit;
+                }
             }
         }
     }
