@@ -78,7 +78,7 @@ function getCurrentStatusLocal (){
         $match = $mapper->hasUserMessageMatch($user);
         
         // if message exists display url for meet2.php
-        if (!is_null($match))
+        if (!is_null($match) && !$match->complete)
         {
             echo ROOT."meet2.php?sender_facebookid=".$match->sender['facebookid']."&receiver_facebookid=".$match->receiver['facebookid'];
             exit;
@@ -95,14 +95,18 @@ function getCurrentStatusLocal (){
             
             if (!empty($users))
             {
+                // if there is a user in the area with same likes
+                
+                
+                
                 $mapper->createMatch($user, $users[0]);
-            	// if there is a user in the area with same likes
             	// return url meet.php
-        //     	echo ROOT."meet.php?sender_facebookid=500383379&receiver_facebookid=1173581624";
                 echo ROOT."meet.php?sender_facebookid=".$user->facebookid."&receiver_facebookid=".$users[0]->facebookid;
                 exit;
             }
         }
     }
 }
+
+// function getCommonLikes()
 ?>

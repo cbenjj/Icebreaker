@@ -14,7 +14,7 @@ $mapper->completeMatch($match);
 	</head>
 	<body>
 
-<h1>CONGRATULATIONS! YOU HAVE BROKEN THE ICE!<br /> HAVE FUN!</h1>
+    <h1>CONGRATULATIONS! You have broken the ice!<br/>Have fun!</h1>
 
 </body>
 </html>
