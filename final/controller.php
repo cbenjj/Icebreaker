@@ -66,7 +66,7 @@ function getCurrentStatusLocal (){
     
     // get latitude and longitude
     $lat = floatval($_GET['lat']);
-    $lng = floatval($_GET['lng']);
+    $lng = floatval($_GET['lon']);
     
     // check for a message from another user
     $match = $mapper->hasUserMessageMatch($user);
