@@ -159,7 +159,20 @@ Class Mapper
         }
     }
     
-    
+    function updateMatch(Match $match)
+    {
+        try {
+        
+            // select a collection:
+            $collection = $this->db->match;
+            $collection->update( array('_id' => new MongoId($match->id)) , $match);
+        
+        
+        } catch (Exception $e) {
+            error_log($e);
+            throw $e;
+        }
+    }
     
     function getMatch(User $sender, User $receiver)
     {

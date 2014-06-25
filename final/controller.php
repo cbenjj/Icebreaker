@@ -33,6 +33,9 @@ function sendMessageLocal()
         $sender = $mapper->getUserByFacebookId($senderid);
         $receiver = $mapper->getUserByFacebookId($receiverid);
         
+        $match=$mapper->getMatch($sender, $receiver);
+        $match->message=$_POST['message'];
+        $mapper->updateMatch($match);
 //         $mapper->createMatch($sender, $receiver, $_POST['message']);
         
         header('location:index.php');
