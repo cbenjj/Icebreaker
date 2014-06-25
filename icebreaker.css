@@ -1,17 +1,17 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto:100,300,400,300italic);
+
 @import url(http://fonts.googleapis.com/css?family=Signika:400,300,600);
 @import url(http://fonts.googleapis.com/css?family=Gloria+Hallelujah);
 @import url(http://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600);
 
 body {
-background: -moz-linear-gradient(top, rgba(237,108,105,0.8) 0%, rgba(12,170,226,1) 100%); /* FF3.6+ */
+	background: -moz-linear-gradient(top, rgba(237,108,105,0.8) 0%, rgba(12,170,226,1) 100%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(237,108,105,0.8)), color-stop(100%,rgba(12,170,226,1))); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(top, rgba(237,108,105,0.8) 0%,rgba(12,170,226,1) 100%); /* Chrome10+,Safari5.1+ */
 background: -o-linear-gradient(top, rgba(237,108,105,0.8) 0%,rgba(12,170,226,1) 100%); /* Opera 11.10+ */
 background: -ms-linear-gradient(top, rgba(237,108,105,0.8) 0%,rgba(12,170,226,1) 100%); /* IE10+ */
 background: linear-gradient(to bottom, rgba(237,108,105,0.8) 0%,rgba(12,170,226,1) 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9ed6c69', endColorstr='#0caae2',GradientType=0 ); /* IE6-9 */
-	height: 1200px;
+	height: 100%;
 	font-family: "Gloria Hallelujah", sans-serif;
 	font-weight: 300;
 	color: #fff;
@@ -19,12 +19,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9ed6c69', e
 	margin: 0 auto;
 }
 h1 {
-	font-weight: 400;
+	line-height:30px;
 }
 .logo img {
 	position: relative;
 	width: 80%;
-	top: 100px;
+	padding-top: 50px;
 	margin: 0 auto;
 	display: block;
 }
@@ -33,7 +33,7 @@ h1 {
 	text-align: center;
 	margin: 0 auto;
 	clear: both;
-	top: 300px;
+	padding-top: 20px;
 }
 .facebook-btn img {
 	width: 60%;
@@ -43,9 +43,9 @@ background-color: white;
 text-align: center;
 }
 .about_me {
-border: 1px solid #fff;
-margin: 10px 15px;
-padding: 20px;
+
+margin: 3px 10px;
+padding: 1px;
 background-color: rgba(255, 255, 255, 0.5);
 color: #333333;
 }
@@ -61,15 +61,17 @@ color: #333333;
 	margin-top: 3px;
 }
 .local-btn {
-	width: 33%;
+
+	width: 80%;
 	padding: 6px 10px;
 	margin: 25px 15px 15px 15px;
 	font-size: 1.2em;
-	background-color: #0caae2;
+	background-color: #E06c69;
 	border-color: #0caae2;
 	color: #fff;
 	font-family: "Gloria Hallelujah", sans-serif;
 	border-radius: 10px;
+	height: 200px;
 }
 button img {
 	width: 13%;
@@ -91,7 +93,15 @@ form, .font2 {
 	border-radius: 5px;
 	background-color: #fff;
 	text-align: center;
-	margin: 30px 15px 15px 15px;
+	margin: 20px 15px 15px 15px;
 	font-family: "Dosis", sans-serif;
 	font-weight: 400;
 }
+
+h3 {
+line-height:10px;
+}
+
+.accordion-toggle {cursor: pointer;}
+.accordion-content {display: none;}
+  .accordion-content.default {display: block;}
