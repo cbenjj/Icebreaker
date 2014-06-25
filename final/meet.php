@@ -21,6 +21,15 @@ usort($commonlikes, "cmp_by_category");
 		<meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="icebreaker.css" />
 		
+		<style type="text/css">
+		html {
+		  height: 100%;
+		}
+		body {
+		  height: 100%;
+		}
+		</style>
+		
 			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         	<script type="text/javascript">
         		$(document).ready(function($) {
