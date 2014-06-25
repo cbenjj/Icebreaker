@@ -290,6 +290,36 @@ Class Mapper
         }  
     }
     
+    function hasPendingMatch(User $user)
+    {
+        try {
+        
+            // select a collection:
+            $collection = $this->db->match;
+            
+            $time = strtotime(date('YmdHis')) - 600; 
+            
+            // validate the user exists to avoid duplicate values
+            // find by criteria
+            $query = array( 
+                            '$and' => array(
+                                    array('timestamp' => array('$gt' => $time)),
+                                    array( 
+                                    '$or' => array( 'receiver.facebookid' => $user->facebookid ) , array( 'sender.facebookid' => $user->facebookid )
+                                    )
+                            ) 
+                        );
+            $result = $collection->count( $query );
+            
+            return $result;
+        
+        
+        } catch (Exception $e) {
+            error_log($e);
+            throw $e;
+        }   	
+    }
+    
 //     function removeCollection()
 //     {
 //         $collection = $this->db->user;

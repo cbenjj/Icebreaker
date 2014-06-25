@@ -52,8 +52,8 @@ function getUserByDeviceIdLocal()
 
 
 function getMatchLocal (){
-	$mapper = new Mapper();
-    $mapper->getMatch($senderid,$recieverid);
+// 	$mapper = new Mapper();
+//     $mapper->getMatch($senderid,$recieverid);
 }
 
 function getCurrentStatusLocal (){
@@ -86,13 +86,18 @@ function getCurrentStatusLocal (){
         $user->location = array($lng, $lat);
         $mapper->updateUserLocation($user);
         
-        $users = $mapper->getUsersByLocation($user, $lat, $lng);
-        if (!empty($users))
+        if (!$mapper->hasPendingMatch($user))
         {
-        	// if there is a user in the area with same likes
-        	// return url meet.php
-    //     	echo ROOT."meet.php?sender_facebookid=500383379&receiver_facebookid=1173581624";
-            echo ROOT."meet.php?sender_facebookid=".$user->facebookid."&receiver_facebookid=".$users[0]->facebookid;
+            $users = $mapper->getUsersByLocation($user, $lat, $lng);
+            
+            if (!empty($users))
+            {
+            	// if there is a user in the area with same likes
+            	// return url meet.php
+        //     	echo ROOT."meet.php?sender_facebookid=500383379&receiver_facebookid=1173581624";
+                echo ROOT."meet.php?sender_facebookid=".$user->facebookid."&receiver_facebookid=".$users[0]->facebookid;
+                exit;
+            }
         }
     }
 }
