@@ -89,7 +89,6 @@ function getCurrentStatusLocal (){
         if (!$mapper->hasPendingMatch($user))
         {
             $users = $mapper->getUsersByLocation($user, $lat, $lng);
-            print"<pre>";print_r($users);print"</pre>";
             
             if (!empty($users))
             {
