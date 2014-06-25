@@ -90,8 +90,10 @@ Class Mapper
             
             foreach ( $cursor as $id => $value )
             {
-                $user = new User($value);
-                array_push($users, $user);
+                $user2 = new User($value);
+                
+                if (is_null($this->getMatch($user, $user2)) && is_null($this->getMatch($user2, $user))) 
+                    array_push($users, $user2);
             }
             
             return $users;

@@ -1,4 +1,19 @@
 <?php require_once 'config.php';?>
+<?php 
+
+$facebook = new Facebook(array(
+        'appId'  => FACEBOOK_APPID,
+        'secret' => FACEBOOK_SECRET,
+));
+
+// Get User ID
+$user = $facebook->getUser();
+
+if ($user) {
+    header('location:index.php');
+}
+
+?>
 <!DOCTYPE HTML>
 <html>
 	<head>
