@@ -81,7 +81,7 @@ Class Mapper
                                             array('$geometry' => 
                                                         array( 'type' => 'Point', 
                                                                'coordinates' => array($lng,$lat)), 
-                                                    '$maxDistance' => intval(3000))),
+                                                    '$maxDistance' => intval(200))),
                             'facebookid' => array('$ne' => $user->facebookid));
             
             $cursor = $collection->find($query);
@@ -134,25 +134,25 @@ Class Mapper
             // validate the user exists to avoid duplicate values
             // find by criteria
             
-            $query = array( '$and' =>
-                        array(
-                        array( 'sender' =>
-                                array( '$elemMatch' =>
-                                        array( 'facebookid' => $sender->facebookid )
-                                )
-                        ),
-                        array( 'receiver' =>
-                                array( '$elemMatch' =>
-                                        array( 'facebookid' => $receiver->facebookid )
-                                )
-                        )
-                        )
-                        );
-
-            $exists = $collection->count( $query );
+//             $query = array( '$and' =>
+//                         array(
+//                         array( 'sender' =>
+//                                 array( '$elemMatch' =>
+//                                         array( 'facebookid' => $sender->facebookid )
+//                                 )
+//                         ),
+//                         array( 'receiver' =>
+//                                 array( '$elemMatch' =>
+//                                         array( 'facebookid' => $receiver->facebookid )
+//                                 )
+//                         )
+//                         )
+//                         );
             
-            print"<pre>";print_r($exists);print"</pre>";
-        
+            
+            $exists = $collection->count( $query );
+            $exists = 0;
+            
             if (!$exists)
             {
                 // convert PHP object to associative array
@@ -162,6 +162,8 @@ Class Mapper
                 $match->sender = $sender;
                 $match->receiver = $receiver;
                 $match->message = $message;
+                $match->timestamp = strtotime(date('YmdHis'));
+                $match->complete = 0;
         
                 $collection->insert( $match );
 //                 $collection->ensureIndex(array('location' => '2dsphere'));
@@ -170,19 +172,85 @@ Class Mapper
         } catch (Exception $e) {
             
             error_log($e);
-            print"<pre>";print_r($e);print"</pre>";
             throw $e;
         }
     }
     
-    function updateUserLocation(User $user)
+    
+    
+    function getMatch(User $sender, User $receiver)
     {
-    	
+        try {
+        
+            // select a collection:
+            $collection = $this->db->match;
+        
+            // validate the user exists to avoid duplicate values
+            // find by criteria
+            $query = array( '$and' => array( array('sender.facebookid' => $sender->facebookid) , array('receiver.facebookid' => $receiver->facebookid) ) );
+            $result = $collection->find( $query )->sort( array( 'timestamp' => -1 ) )->limit(1);
+        
+            if ($result->hasNext())
+            {
+                $match = new Match($result->getNext());
+                return $match;
+            }
+        
+            return null;
+        
+        } catch (Exception $e) {
+            error_log($e);
+            throw $e;
+        }    	
     }
     
-    function getMatch(User $u1, User $u2)
+    function getMatchById($matchid)
     {
-    	
+        try {
+    
+            // select a collection:
+            $collection = $this->db->match;
+    
+            // validate the user exists to avoid duplicate values
+            // find by criteria
+            $query = array( '_id' => new MongoId($matchid) );
+            $result = $collection->findOne( $query );
+            
+            $match = new Match($result);
+    
+            return $match;
+    
+        } catch (Exception $e) {
+            error_log($e);
+            throw $e;
+        }
+    }
+    
+    function hasUserMessageMatch(User $user)
+    {
+        try {
+        
+            // select a collection:
+            $collection = $this->db->match;
+        
+            // validate the user exists to avoid duplicate values
+            // find by criteria
+            $query = array( 'receiver.facebookid' => $user->facebookid );
+            $result = $collection->find( $query )->sort( array( 'timestamp' => -1 ) )->limit(1);
+        
+            if ($result->hasNext())
+            {
+                
+                $match = new Match($result->getNext());
+                return $match;
+            }
+
+            return null;
+        
+        } catch (Exception $e) {
+            error_log($e);
+            throw $e;
+        }   	
     }
 
     // compare users common things and return the user with a higher score
@@ -190,8 +258,36 @@ Class Mapper
     {
     	$maxscore = 0;
     	$maxuser = null;
-    	
-    	
+    }
+    
+    function updateUserLocation(User $user)
+    {
+        try {
+        
+            // select a collection:
+            $collection = $this->db->user;
+            $collection->update( array('facebookid' => $user->facebookid) , $user);
+        
+        } catch (Exception $e) {
+            error_log($e);
+            throw $e;
+        } 
+    }
+    
+    function completeMatch(Match $match)
+    {
+        try {
+        
+            // select a collection:
+            $collection = $this->db->match;
+            $match->complete = 1;
+            $collection->update( array('_id' => new MongoId($match->id)) , $match);
+        
+        
+        } catch (Exception $e) {
+            error_log($e);
+            throw $e;
+        }  
     }
     
 //     function removeCollection()

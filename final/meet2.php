@@ -6,6 +6,8 @@ $receiver_facebookid = $_REQUEST['receiver_facebookid'];
 $mapper = new Mapper();
 $sender = $mapper->getUserByFacebookId($sender_facebookid);
 $receiver = $mapper->getUserByFacebookId($receiver_facebookid);
+
+$match = $mapper->getMatch($sender, $receiver);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -16,9 +18,11 @@ $receiver = $mapper->getUserByFacebookId($receiver_facebookid);
 	<body>
 
 <h1>Hi <?=$receiver->firstname?>, I'm <?=$sender->firstname?>!<br> Wanna meet?</h1>
-<p class="message"><?=$_REQUEST['message']?></p>
+<p class="message"><?=$match->message?></p>
+<form action="icebroken.php" method="post">
+<input type="hidden" name="matchid" value="<?=$match->id?>" />
 <button class="local-btn" type="submit">Break the Ice!<img src="hammer.png"/></button>
-
+</form>
 <br>
 
 <h2 class="font2"> Things we have in common</h2>
