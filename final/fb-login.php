@@ -23,9 +23,8 @@ if ($user) {
         $user = null;
     }
 
-    // TODO: REPLACE THIS PART OF CODE WITH THE URL QUERY STRING
-    $lng = floatval(34.794166);
-    $lat = floatval(32.070544);
+    $lng = floatval($_GET['lng']);
+    $lat = floatval($_GET['lat']);
     
     $user = new User();
     $user->firstname = $user_profile['first_name'];
@@ -53,6 +52,7 @@ if ($user) {
     $user->lng = $lng;
     $user->lat = $lat;
     $user->location = array($lng, $lat);
+    $user->deviceid = $_GET['deviceid'];
     
     $mapper->signup($user);
     
