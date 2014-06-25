@@ -1,5 +1,4 @@
 <?php
-
 require_once 'config.php';
 
 $mapper = new Mapper();
@@ -23,13 +22,13 @@ if ($user) {
         $user = null;
     }
 
-    $lng = floatval($_GET['lng']);
-    $lat = floatval($_GET['lat']);
+//     $lng = floatval($_GET['lng']);
+//     $lat = floatval($_GET['lat']);
     
     $user = new User();
     $user->firstname = $user_profile['first_name'];
     $user->lastname = $user_profile['last_name'];
-    $user->email = $user_profile['email'];
+    $user->email = isset($user_profile['email'])?$user_profile['email']:'';
     $user->facebookid = $user_profile['id'];
     $user->likes = array();
     foreach ($user_likes['data'] as $item)
@@ -41,7 +40,7 @@ if ($user) {
     }
     $user->hometown = isset($user_profile['hometown'])?$user_profile['hometown']['name']:'';
     $user->currentcity = isset($user_profile['location'])?$user_profile['location']['name']:'';
-    $user->birthday = $user_profile['birthday'];
+    $user->birthday = isset($user_profile['birthday'])?$user_profile['birthday']:'';
     if (isset($user_profile['languages']))
     {
         foreach ($user_profile['languages'] as $item)
@@ -49,9 +48,9 @@ if ($user) {
             array_push($user->languages, $item['name']);
         }
     }
-    $user->lng = $lng;
-    $user->lat = $lat;
-    $user->location = array($lng, $lat);
+//     $user->lng = $lng;
+//     $user->lat = $lat;
+//     $user->location = array($lng, $lat);
     $user->deviceid = $_GET['deviceid'];
     
     $mapper->signup($user);
