@@ -61,7 +61,7 @@ else
 {
     $params = array('scope' => 'user_likes, email, languages, favorite_teams, education');
     
-    $loginUrl = $facebook->getLoginUrl();
+    $loginUrl = $facebook->getLoginUrl($params);
 
     header('location:'.$loginUrl);
 }
