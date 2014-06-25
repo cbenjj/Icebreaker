@@ -312,7 +312,10 @@ Class Mapper
                                     )
                             ) 
                         );
+            
             $result = $collection->count( $query );
+            
+            print"<pre>";print_r($result);print"</pre>";
             
             return $result;
         
